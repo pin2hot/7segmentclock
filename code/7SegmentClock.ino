@@ -610,6 +610,20 @@ void displayEnv(){
   leds[c3_offset] = CRGB::Black;
   FastLED.show();
   delay(param_scrolltime*1000);
+  
+  writeDigit(1, d0_offset, 24);
+  writeDigit(1, d1_offset, parse_int(pressure/10, 1)); //gets the first decimal value
+  writeDigit(1, d2_offset, parse_int(pressure/100, 1));
+  writeDigit(1, d3_offset, parse_int(pressure/100, 10));
+  writeDigit(1, d4_offset, parse_int(pressure/100, 100));
+  writeDigit(1, d5_offset, parse_int(pressure/100, 1000));
+  leds[c0_offset] = CRGB::Black;
+  leds[c1_offset] = CRGB::Black;
+  leds[c2_offset] = CHSV(param_color, 255, param_brightness);
+  leds[c3_offset] = CRGB::Black;
+  FastLED.show();
+  Serial.println(pressure);
+  delay(param_scrolltime*1000);
 
   writeDigit(1, d0_offset, parse_int(CO2, 1));
   writeDigit(1, d1_offset, parse_int(CO2, 10));
